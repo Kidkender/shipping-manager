@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b98700e87e349bca3e1b385d45f08cc" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.ChiTietDH" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.DanhMucSP" Width="1.5" PointX="4.875" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.DonHang" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.Donvivanchuyen" Width="1.5" PointX="13.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.KhachHang" Width="1.5" PointX="2.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.NhanVien" Width="1.5" PointX="10.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.Phieugiaohang" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.SanPham" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.sysdiagram" Width="1.5" PointX="13.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.TaiKhoanKhachHang" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLVC_NhaNamv2Model.TaiKhoanNhanVien" Width="1.5" PointX="10.375" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_ChiTietDH_MaDH" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_ChiTietDH_MaSP" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_SanPham_MaDM" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_DDH_MaNV" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_DH_MaKH" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_PGH_MaDH" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_NhanVien_MaDV" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_TaiKhoanKH_MaNV" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_PGH_MaNV" ManuallyRouted="false" />
+        <AssociationConnector Association="QLVC_NhaNamv2Model.FK_TaiKhoanNV_MaNV" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
