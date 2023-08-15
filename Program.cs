@@ -16,7 +16,7 @@ namespace QLVNNhaNam
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GiaoKhachHang());
+            Application.Run(new DangNhap());
         }
     }
 }

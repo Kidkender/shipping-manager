@@ -30,10 +30,16 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lblUserName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnKhieuBai = new System.Windows.Forms.Button();
+            this.btnXacNhan = new System.Windows.Forms.Button();
             this.dgvDSDonHang = new System.Windows.Forms.DataGridView();
+            this.txtusername = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaDH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NDH = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,13 +48,7 @@
             this.TTDH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LyDo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PTTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NVGH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnXacNhan = new System.Windows.Forms.Button();
-            this.btnKhieuBai = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,15 +67,28 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.lblUserName);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.txtusername);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1358, 484);
+            this.tabPage1.Size = new System.Drawing.Size(1446, 804);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(438, 38);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(368, 32);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Hệ thống quản lý giao hàng ";
             // 
             // tabPage2
             // 
@@ -93,25 +106,57 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lblUserName
+            // button3
             // 
-            this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(117, 22);
-            this.lblUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(111, 16);
-            this.lblUserName.TabIndex = 11;
-            this.lblUserName.Text = "Nguyễn Văn Test";
+            this.button3.Location = new System.Drawing.Point(828, 410);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(221, 58);
+            this.button3.TabIndex = 22;
+            this.button3.Text = "Danh sách đơn hàng cần nhận (đổi/trả) ";
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // button2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 22);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 16);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Xin chào";
+            this.button2.Location = new System.Drawing.Point(560, 410);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(221, 58);
+            this.button2.TabIndex = 21;
+            this.button2.Text = "Danh sách đơn hàng cần giao trong ngày";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(290, 410);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(221, 58);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "Thống kê danh sách đơn hàng";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnKhieuBai
+            // 
+            this.btnKhieuBai.Enabled = false;
+            this.btnKhieuBai.Location = new System.Drawing.Point(1093, 410);
+            this.btnKhieuBai.Margin = new System.Windows.Forms.Padding(4);
+            this.btnKhieuBai.Name = "btnKhieuBai";
+            this.btnKhieuBai.Size = new System.Drawing.Size(176, 58);
+            this.btnKhieuBai.TabIndex = 19;
+            this.btnKhieuBai.Text = "Yêu cầu khiếu nại đơn hàng";
+            this.btnKhieuBai.UseVisualStyleBackColor = true;
+            // 
+            // btnXacNhan
+            // 
+            this.btnXacNhan.Location = new System.Drawing.Point(23, 410);
+            this.btnXacNhan.Margin = new System.Windows.Forms.Padding(4);
+            this.btnXacNhan.Name = "btnXacNhan";
+            this.btnXacNhan.Size = new System.Drawing.Size(221, 58);
+            this.btnXacNhan.TabIndex = 18;
+            this.btnXacNhan.Text = "Xác nhận đơn hàng đã giao";
+            this.btnXacNhan.UseVisualStyleBackColor = true;
+            this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
             // 
             // dgvDSDonHang
             // 
@@ -126,7 +171,6 @@
             this.TTDH,
             this.LyDo,
             this.PTTT,
-            this.NVGH,
             this.CPVN});
             this.dgvDSDonHang.Location = new System.Drawing.Point(23, 29);
             this.dgvDSDonHang.Margin = new System.Windows.Forms.Padding(4);
@@ -134,6 +178,26 @@
             this.dgvDSDonHang.RowHeadersWidth = 51;
             this.dgvDSDonHang.Size = new System.Drawing.Size(1216, 346);
             this.dgvDSDonHang.TabIndex = 13;
+            this.dgvDSDonHang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSDonHang_CellContentClick);
+            // 
+            // txtusername
+            // 
+            this.txtusername.Enabled = false;
+            this.txtusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtusername.Location = new System.Drawing.Point(509, 132);
+            this.txtusername.Name = "txtusername";
+            this.txtusername.Size = new System.Drawing.Size(297, 34);
+            this.txtusername.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(335, 137);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 29);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Xin chào :";
             // 
             // STT
             // 
@@ -191,70 +255,12 @@
             this.PTTT.Name = "PTTT";
             this.PTTT.Width = 125;
             // 
-            // NVGH
-            // 
-            this.NVGH.HeaderText = "Nhân viên giao hàng";
-            this.NVGH.MinimumWidth = 6;
-            this.NVGH.Name = "NVGH";
-            this.NVGH.Width = 125;
-            // 
             // CPVN
             // 
             this.CPVN.HeaderText = "Chi phí vận chuyển";
             this.CPVN.MinimumWidth = 6;
             this.CPVN.Name = "CPVN";
             this.CPVN.Width = 125;
-            // 
-            // btnXacNhan
-            // 
-            this.btnXacNhan.Location = new System.Drawing.Point(23, 410);
-            this.btnXacNhan.Margin = new System.Windows.Forms.Padding(4);
-            this.btnXacNhan.Name = "btnXacNhan";
-            this.btnXacNhan.Size = new System.Drawing.Size(221, 58);
-            this.btnXacNhan.TabIndex = 18;
-            this.btnXacNhan.Text = "Xác nhận đơn hàng đã giao";
-            this.btnXacNhan.UseVisualStyleBackColor = true;
-            // 
-            // btnKhieuBai
-            // 
-            this.btnKhieuBai.Enabled = false;
-            this.btnKhieuBai.Location = new System.Drawing.Point(1093, 410);
-            this.btnKhieuBai.Margin = new System.Windows.Forms.Padding(4);
-            this.btnKhieuBai.Name = "btnKhieuBai";
-            this.btnKhieuBai.Size = new System.Drawing.Size(176, 58);
-            this.btnKhieuBai.TabIndex = 19;
-            this.btnKhieuBai.Text = "Yêu cầu khiếu nại đơn hàng";
-            this.btnKhieuBai.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(290, 410);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(221, 58);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "Thống kê danh sách đơn hàng";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(560, 410);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(221, 58);
-            this.button2.TabIndex = 21;
-            this.button2.Text = "Danh sách đơn hàng cần giao trong ngày";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(828, 410);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(221, 58);
-            this.button3.TabIndex = 22;
-            this.button3.Text = "Danh sách đơn hàng cần nhận (đổi/trả) ";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // TaiKhoanNhanVienGIaoHang
             // 
@@ -279,9 +285,15 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label lblUserName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvDSDonHang;
+        private System.Windows.Forms.Button btnXacNhan;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnKhieuBai;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtusername;
         private System.Windows.Forms.DataGridViewTextBoxColumn STT;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaDH;
         private System.Windows.Forms.DataGridViewTextBoxColumn NDH;
@@ -290,12 +302,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TTDH;
         private System.Windows.Forms.DataGridViewTextBoxColumn LyDo;
         private System.Windows.Forms.DataGridViewTextBoxColumn PTTT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NVGH;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPVN;
-        private System.Windows.Forms.Button btnXacNhan;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnKhieuBai;
     }
 }
