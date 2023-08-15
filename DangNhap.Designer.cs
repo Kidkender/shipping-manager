@@ -107,11 +107,11 @@
             // 
             this.btnwithguess.BackColor = System.Drawing.Color.LawnGreen;
             this.btnwithguess.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnwithguess.Location = new System.Drawing.Point(809, 355);
+            this.btnwithguess.Location = new System.Drawing.Point(760, 355);
             this.btnwithguess.Name = "btnwithguess";
-            this.btnwithguess.Size = new System.Drawing.Size(191, 47);
+            this.btnwithguess.Size = new System.Drawing.Size(319, 47);
             this.btnwithguess.TabIndex = 12;
-            this.btnwithguess.Text = "Đăng nhập";
+            this.btnwithguess.Text = "Đăng nhập tài khoản khách";
             this.btnwithguess.UseVisualStyleBackColor = false;
             this.btnwithguess.Click += new System.EventHandler(this.btnwithguess_Click);
             // 
