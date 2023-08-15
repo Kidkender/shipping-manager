@@ -42,7 +42,6 @@
             this.LyDo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PTTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSDonHang)).BeginInit();
             this.SuspendLayout();
@@ -51,28 +50,28 @@
             // 
             this.noteLyDo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.noteLyDo.Location = new System.Drawing.Point(4, 19);
-            this.noteLyDo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.noteLyDo.Margin = new System.Windows.Forms.Padding(4);
             this.noteLyDo.Name = "noteLyDo";
-            this.noteLyDo.Size = new System.Drawing.Size(581, 373);
+            this.noteLyDo.Size = new System.Drawing.Size(1093, 154);
             this.noteLyDo.TabIndex = 0;
             this.noteLyDo.Text = "";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.noteLyDo);
-            this.groupBox1.Location = new System.Drawing.Point(16, 32);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(27, 483);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(589, 396);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(1101, 177);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập lý do đổi/trả đơn hàng";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(419, 759);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(632, 686);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 28);
             this.button1.TabIndex = 2;
@@ -82,8 +81,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(647, 94);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Location = new System.Drawing.Point(355, 686);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(260, 28);
             this.button2.TabIndex = 3;
@@ -93,7 +92,9 @@
             // 
             // dgvDSDonHang
             // 
+            this.dgvDSDonHang.AllowUserToAddRows = false;
             this.dgvDSDonHang.AllowUserToDeleteRows = false;
+            this.dgvDSDonHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDSDonHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSDonHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.STT,
@@ -105,11 +106,12 @@
             this.LyDo,
             this.PTTT,
             this.CPVN});
-            this.dgvDSDonHang.Location = new System.Drawing.Point(20, 457);
+            this.dgvDSDonHang.Location = new System.Drawing.Point(27, 48);
             this.dgvDSDonHang.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDSDonHang.Name = "dgvDSDonHang";
+            this.dgvDSDonHang.ReadOnly = true;
             this.dgvDSDonHang.RowHeadersWidth = 51;
-            this.dgvDSDonHang.Size = new System.Drawing.Size(1097, 276);
+            this.dgvDSDonHang.Size = new System.Drawing.Size(1097, 412);
             this.dgvDSDonHang.TabIndex = 3;
             // 
             // STT
@@ -117,85 +119,74 @@
             this.STT.HeaderText = "STT";
             this.STT.MinimumWidth = 6;
             this.STT.Name = "STT";
-            this.STT.Width = 40;
+            this.STT.ReadOnly = true;
             // 
             // MaDH
             // 
             this.MaDH.HeaderText = "Mã đơn hàng";
             this.MaDH.MinimumWidth = 6;
             this.MaDH.Name = "MaDH";
-            this.MaDH.Width = 125;
+            this.MaDH.ReadOnly = true;
             // 
             // NDH
             // 
             this.NDH.HeaderText = "Ngày đặt hàng";
             this.NDH.MinimumWidth = 6;
             this.NDH.Name = "NDH";
-            this.NDH.Width = 125;
+            this.NDH.ReadOnly = true;
             // 
             // NgayDuKienGiao
             // 
             this.NgayDuKienGiao.HeaderText = "Ngày xác nhận đã nhận hàng.";
             this.NgayDuKienGiao.MinimumWidth = 6;
             this.NgayDuKienGiao.Name = "NgayDuKienGiao";
-            this.NgayDuKienGiao.Width = 125;
+            this.NgayDuKienGiao.ReadOnly = true;
             // 
             // NNH
             // 
             this.NNH.HeaderText = "Ngày đổi/trả dự kiến";
             this.NNH.MinimumWidth = 6;
             this.NNH.Name = "NNH";
-            this.NNH.Width = 125;
+            this.NNH.ReadOnly = true;
             // 
             // TTDH
             // 
             this.TTDH.HeaderText = "Tình trạng đơn hàng";
             this.TTDH.MinimumWidth = 6;
             this.TTDH.Name = "TTDH";
-            this.TTDH.Width = 125;
+            this.TTDH.ReadOnly = true;
             // 
             // LyDo
             // 
             this.LyDo.HeaderText = "Lý do";
             this.LyDo.MinimumWidth = 6;
             this.LyDo.Name = "LyDo";
-            this.LyDo.Width = 125;
+            this.LyDo.ReadOnly = true;
             // 
             // PTTT
             // 
             this.PTTT.HeaderText = "Phương thức thanh toán";
             this.PTTT.MinimumWidth = 6;
             this.PTTT.Name = "PTTT";
-            this.PTTT.Width = 125;
+            this.PTTT.ReadOnly = true;
             // 
             // CPVN
             // 
             this.CPVN.HeaderText = "Chi phí vận chuyển";
             this.CPVN.MinimumWidth = 6;
             this.CPVN.Name = "CPVN";
-            this.CPVN.Width = 125;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(610, 759);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(260, 28);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Gửi yêu cầu đổi/trả đơn hàng.";
-            this.button3.UseVisualStyleBackColor = true;
+            this.CPVN.ReadOnly = true;
             // 
             // NhapLyDo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1606, 880);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1196, 779);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvDSDonHang);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NhapLyDo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nhập lý do";
@@ -222,6 +213,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LyDo;
         private System.Windows.Forms.DataGridViewTextBoxColumn PTTT;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPVN;
-        private System.Windows.Forms.Button button3;
     }
 }

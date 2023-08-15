@@ -33,7 +33,103 @@ namespace QLVNNhaNam
 
         private void NhapLyDo_Load(object sender, EventArgs e)
         {
+            dgvDSDonHang.Rows.Clear();
 
+            var query = (from dh in conectionDB.DonHangs
+                         join nv in conectionDB.NhanViens on dh.MaNV equals nv.MaNV
+                         join dv in conectionDB.Donvivanchuyens on nv.MaDV equals dv.MaDV
+                         join kh in conectionDB.KhachHangs on dh.MaKH equals kh.MaKH
+                         where dh.MaDH == maDH
+                         select new DonHangDTO
+                         {
+                             MaDH = dh.MaDH,
+                             TenNV = nv.TenNV,
+                             Ngaydathang = dh.Ngaydathang,
+                             Ngaydukiengiao = dh.Ngaydukiengiao,
+                             PTTT = dh.PTTT,
+                             TinhtrangDH = dh.TinhtrangDH,
+                             ChiphiVC = dh.ChiphiVC,
+                             LyDo = dh.LyDo,
+                             NgayNhanHang = dh.NgayNhanHang,
+                             TenDV = dv.TenDV,
+                             DiaChiKH = kh.DiaChiKH
+                         }).ToList();
+
+
+            var result = query.ToList();
+
+            if (result.Count > 0 && result != null)
+            {
+                int index = 1;
+                foreach (var item in result)
+                {
+                    // Thêm dòng mới với dữ liệu cho từng cột tương ứng
+
+                    if (item.TinhtrangDH != EnumField.DoiHuyDon)
+                    {
+
+                        if (item.TenDV == "Giao hàng tiết kiệm" || item.TenDV == "ViettelPost" ||
+                     item.TenDV == "Giao Hàng Nhanh")
+                        {
+                            if (item.DiaChiKH.Contains("HCM") || item.DiaChiKH.Contains("Hà Nội"))
+                            {
+                                item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydathang).AddDays(3);
+                            }
+                            else item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydathang).AddDays(5);
+                        }
+                        //Đơn hàng do nhân viên giao hàng thuộc đơn vị J & T Express giao: 
+                        //Nếu địa chỉ khách hàng thuộc Hồ Chí Minh hoặc Hà Nội thì ngày dự kiến giao hàng là 3 ngày kể từ ngày đặt hàng. 
+                        //Nếu địa chỉ khác thì ngày dự kiến giao hàng là 6 ngày kể từ ngày đặt hàng.
+                        else if (item.TenDV == "J&T Express")
+                        {
+                            if (item.DiaChiKH.Contains("HCM") || item.DiaChiKH.Contains("Hà Nội"))
+                            {
+                                item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydathang).AddDays(3);
+                            }
+                            else item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydathang).AddDays(6);
+                        }
+                        //Đơn hàng do nhân viên giao hàng thuộc đơn vị Ahamove, GrabExpress, Lalamove, Nhã Nam giao:
+                        //Nếu địa chỉ khách hàng thuộc Hồ Chí Minh hoặc Hà Nội thì ngày dự kiến giao hàng là ngày đặt hàng.
+                        else if (item.TenDV == "Ahamove" ||
+                                item.TenDV == "GrabExpress" ||
+                                item.TenDV == "Lalamove" ||
+                                item.TenDV == "Nhã Nam")
+                        {
+                            item.Ngaydukiengiao = item.Ngaydathang;
+                        }
+                        //Đơn hàng do nhân viên giao hàng thuộc Bưu điện giao:
+                        //ngày dự kiến giao hàng là 5 ngày kể từ ngày đặt hàng.
+                        else if (item.TenDV == "Bưu điện Việt Nam")
+                        {
+                            item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydathang).AddDays(5);
+                        }
+                    }
+                    else
+                    {
+                        if (item.Ngaydukiengiao.HasValue && item.Ngaydathang.HasValue)
+                        {
+                            TimeSpan difference = item.Ngaydukiengiao.Value - item.Ngaydathang.Value;
+                            int daysDifference = Math.Abs(difference.Days);
+                            item.Ngaydukiengiao = Convert.ToDateTime(item.Ngaydukiengiao).AddDays(daysDifference);
+                        }
+                    }
+
+
+                    dgvDSDonHang.Rows.Add(
+                        index.ToString(),
+                        item.MaDH,
+                        item.Ngaydathang?.ToString("dd/MM/yyyy"),
+                        item.Ngaydukiengiao?.ToString("dd/MM/yyyy"),
+                        item.NgayNhanHang?.ToString("dd/MM/yyyy"),
+                        item.TinhtrangDH,
+                        item.LyDo,
+                        item.PTTT,
+                        item.TenNV,
+                        item.ChiphiVC.ToString()
+                    );
+                    index++;
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
