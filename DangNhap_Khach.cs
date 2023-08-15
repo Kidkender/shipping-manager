@@ -8,40 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace QLVNNhaNam
 {
-    public partial class DangNhap : Form
-
+    public partial class DangNhap_Khach : Form
     {
         string connectionString = "Data Source=21.241.123.176,1433;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=123";
 
-        public DangNhap()
+        public DangNhap_Khach()
         {
             InitializeComponent();
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-                    }
-
-        private void DangNhap_Load(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void btnlogin_Click(object sender, EventArgs e)
+        private void btndn_Click(object sender, EventArgs e)
         {
-            string email = txtemail.Text;
-            string password = txtpassword.Text;
+            string email = txtuser.Text;
+            string password = txtpass.Text;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 // Truy vấn kiểm tra tài khoản
-                string query = "SELECT COUNT(*) FROM TaiKhoanNhanVien WHERE EmailNV = @Email AND MatKhau = @Password";
+                string query = "SELECT COUNT(*) FROM TaiKhoanKhachHang WHERE EmailNV = @Email AND MatKhau = @Password";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Email", email);
@@ -52,9 +46,8 @@ namespace QLVNNhaNam
                     if (count > 0)
                     {
                         MessageBox.Show("Đăng nhập thành công!");
-                        TaiKhoanNhanVienGIaoHang taiKhoanNhanVienGiaoHangForm = new TaiKhoanNhanVienGIaoHang(email);
-                        taiKhoanNhanVienGiaoHangForm.emailNv=email;
-                        taiKhoanNhanVienGiaoHangForm.Show();
+                        GiaoKhachHang gkh = new GiaoKhachHang();
+                        gkh.Show();
                         this.Hide();
                     }
                     else
@@ -65,9 +58,9 @@ namespace QLVNNhaNam
             }
         }
 
-        private void btnwithguess_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            DangNhap_Khach dnk = new DangNhap_Khach();
+            DangNhap dnk = new DangNhap();
             dnk.Show();
         }
     }
