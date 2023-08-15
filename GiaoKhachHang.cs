@@ -24,7 +24,6 @@ namespace QLVNNhaNam
 
         private void GiaoKhachHang_Load(object sender, EventArgs e)
         {
-
             this.reloadData();
         }
 
@@ -32,11 +31,11 @@ namespace QLVNNhaNam
         private void dgvDSDonHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            if (e.RowIndex >= 0 ) // Đảm bảo người dùng không click vào tiêu đề cột và tiêu đề dòng
+            if (e.RowIndex >= 0) // Đảm bảo người dùng không click vào tiêu đề cột và tiêu đề dòng
             {
                 dgvDSSanPham.Rows.Clear();
                 DataGridViewRow selectedRow = dgvDSDonHang.Rows[e.RowIndex];
-                var maDH = selectedRow.Cells["MaDH"]?.Value.ToString(); 
+                var maDH = selectedRow.Cells["MaDH"]?.Value.ToString();
                 var pttt = selectedRow.Cells["PTTT"]?.Value.ToString();
                 var tt = selectedRow.Cells["TTDH"]?.Value?.ToString();
 
@@ -46,11 +45,12 @@ namespace QLVNNhaNam
                 cbxPTTT.Text = pttt.ToString();
 
                 var result = conectionDB.ChiTietDHs.Include(db => db.SanPham).Where(x => x.MaDH == maDH)
-                .Select(x => new {
+                .Select(x => new
+                {
                     TenSanPham = x.SanPham.TenSP,
                     SoLuong = x.SLDat,
                     DonGia = x.SanPham.Dongiaban,
-                    ThanhTien = x.SLDat *x.SanPham.Dongiaban
+                    ThanhTien = x.SLDat * x.SanPham.Dongiaban
                 }).ToList();
 
                 //Thêm dữ liệu vào DataGridView
@@ -87,13 +87,12 @@ namespace QLVNNhaNam
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
-                NhapLyDo form = new NhapLyDo();
+                ThaoTacHuyDon form = new ThaoTacHuyDon();
                 form.maDH = txtMaDH.Text;
                 form.Text = "Lý do " + clickedButton.Text;
-                form.tinhTrang = EnumField.DaHuyDon;
+                form.tinhTrang = EnumField.DaNhanDon;
                 form.OnDataSaved += reloadData;
-                form.Show();
-
+                form.ShowDialog();
             }
 
         }
@@ -117,7 +116,7 @@ namespace QLVNNhaNam
                 data.TinhtrangDH = EnumField.DaNhanDon;
                 data.NgayNhanHang = DateTime.Now;
                 conectionDB.SaveChanges();
-                 this.reloadData();
+                this.reloadData();
 
             }
             else if (result == DialogResult.No)
@@ -126,7 +125,7 @@ namespace QLVNNhaNam
             }
         }
 
-        public  void reloadData()
+        public void reloadData()
         {
             dgvDSDonHang.Rows.Clear();
 
@@ -137,17 +136,17 @@ namespace QLVNNhaNam
                          where dh.MaKH == maKH
                          select new DonHangDTO
                          {
-                             MaDH =dh.MaDH,
-                             TenNV= nv.TenNV,
-                             Ngaydathang =dh.Ngaydathang,
+                             MaDH = dh.MaDH,
+                             TenNV = nv.TenNV,
+                             Ngaydathang = dh.Ngaydathang,
                              Ngaydukiengiao = dh.Ngaydukiengiao,
-                             PTTT =dh.PTTT,
-                             TinhtrangDH= dh.TinhtrangDH,
+                             PTTT = dh.PTTT,
+                             TinhtrangDH = dh.TinhtrangDH,
                              ChiphiVC = dh.ChiphiVC,
-                             LyDo= dh.LyDo,
-                             NgayNhanHang= dh.NgayNhanHang,
-                             TenDV= dv.TenDV,
-                             DiaChiKH=  kh.DiaChiKH
+                             LyDo = dh.LyDo,
+                             NgayNhanHang = dh.NgayNhanHang,
+                             TenDV = dv.TenDV,
+                             DiaChiKH = kh.DiaChiKH
                          }).ToList();
 
 
@@ -160,7 +159,7 @@ namespace QLVNNhaNam
                 {
                     // Thêm dòng mới với dữ liệu cho từng cột tương ứng
 
-                    if(item.TinhtrangDH != EnumField.DoiHuyDon)
+                    if (item.TinhtrangDH != EnumField.DoiHuyDon)
                     {
 
                         if (item.TenDV == "Giao hàng tiết kiệm" || item.TenDV == "ViettelPost" ||
@@ -287,10 +286,10 @@ namespace QLVNNhaNam
                 form.Text = "Lý do " + clickedButton.Text;
                 form.tinhTrang = EnumField.TraDon;
                 form.OnDataSaved += reloadData;
-                form.Show();
+                form.ShowDialog();
 
             }
-           
+
         }
 
         private void btnKhieuBai_Click(object sender, EventArgs e)
@@ -311,7 +310,7 @@ namespace QLVNNhaNam
                 form.Text = "Lý do " + clickedButton.Text;
                 form.tinhTrang = EnumField.KhieuNaiDon;
                 form.OnDataSaved += reloadData;
-                form.Show();
+                form.ShowDialog();
 
             }
         }
@@ -334,7 +333,7 @@ namespace QLVNNhaNam
                 form.Text = "Lý do " + clickedButton.Text;
                 form.tinhTrang = EnumField.DoiHuyDon;
                 form.OnDataSaved += reloadData;
-                form.Show();
+                form.ShowDialog();
 
             }
         }

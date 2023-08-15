@@ -189,6 +189,9 @@
             // 
             // dgvDSSanPham
             // 
+            this.dgvDSSanPham.AllowUserToAddRows = false;
+            this.dgvDSSanPham.AllowUserToDeleteRows = false;
+            this.dgvDSSanPham.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDSSanPham.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSSanPham.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.STTSanPham,
@@ -196,11 +199,13 @@
             this.SL,
             this.DG,
             this.TT});
-            this.dgvDSSanPham.Location = new System.Drawing.Point(8, 23);
+            this.dgvDSSanPham.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDSSanPham.Location = new System.Drawing.Point(4, 19);
             this.dgvDSSanPham.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDSSanPham.Name = "dgvDSSanPham";
+            this.dgvDSSanPham.ReadOnly = true;
             this.dgvDSSanPham.RowHeadersWidth = 51;
-            this.dgvDSSanPham.Size = new System.Drawing.Size(701, 351);
+            this.dgvDSSanPham.Size = new System.Drawing.Size(664, 351);
             this.dgvDSSanPham.TabIndex = 11;
             this.dgvDSSanPham.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSSanPham_CellContentClick);
             // 
@@ -209,35 +214,35 @@
             this.STTSanPham.HeaderText = "STT";
             this.STTSanPham.MinimumWidth = 6;
             this.STTSanPham.Name = "STTSanPham";
-            this.STTSanPham.Width = 50;
+            this.STTSanPham.ReadOnly = true;
             // 
             // TSP
             // 
             this.TSP.HeaderText = "Tên sản phẩm";
             this.TSP.MinimumWidth = 6;
             this.TSP.Name = "TSP";
-            this.TSP.Width = 125;
+            this.TSP.ReadOnly = true;
             // 
             // SL
             // 
             this.SL.HeaderText = "Số lượng";
             this.SL.MinimumWidth = 6;
             this.SL.Name = "SL";
-            this.SL.Width = 125;
+            this.SL.ReadOnly = true;
             // 
             // DG
             // 
             this.DG.HeaderText = "Đơn giá";
             this.DG.MinimumWidth = 6;
             this.DG.Name = "DG";
-            this.DG.Width = 125;
+            this.DG.ReadOnly = true;
             // 
             // TT
             // 
             this.TT.HeaderText = "Thành tiền";
             this.TT.MinimumWidth = 6;
             this.TT.Name = "TT";
-            this.TT.Width = 125;
+            this.TT.ReadOnly = true;
             // 
             // groupBox1
             // 
@@ -253,7 +258,9 @@
             // 
             // dgvDSDonHang
             // 
+            this.dgvDSDonHang.AllowUserToAddRows = false;
             this.dgvDSDonHang.AllowUserToDeleteRows = false;
+            this.dgvDSDonHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDSDonHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSDonHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.STT,
@@ -266,11 +273,13 @@
             this.PTTT,
             this.NVGH,
             this.CPVN});
-            this.dgvDSDonHang.Location = new System.Drawing.Point(8, 23);
+            this.dgvDSDonHang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDSDonHang.Location = new System.Drawing.Point(4, 19);
             this.dgvDSDonHang.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDSDonHang.Name = "dgvDSDonHang";
+            this.dgvDSDonHang.ReadOnly = true;
             this.dgvDSDonHang.RowHeadersWidth = 51;
-            this.dgvDSDonHang.Size = new System.Drawing.Size(927, 346);
+            this.dgvDSDonHang.Size = new System.Drawing.Size(919, 351);
             this.dgvDSDonHang.TabIndex = 2;
             this.dgvDSDonHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSDonHang_CellClick);
             this.dgvDSDonHang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSDonHang_CellContentClick);
@@ -280,70 +289,70 @@
             this.STT.HeaderText = "STT";
             this.STT.MinimumWidth = 6;
             this.STT.Name = "STT";
-            this.STT.Width = 40;
+            this.STT.ReadOnly = true;
             // 
             // MaDH
             // 
             this.MaDH.HeaderText = "Mã đơn hàng";
             this.MaDH.MinimumWidth = 6;
             this.MaDH.Name = "MaDH";
-            this.MaDH.Width = 125;
+            this.MaDH.ReadOnly = true;
             // 
             // NDH
             // 
             this.NDH.HeaderText = "Ngày đặt hàng";
             this.NDH.MinimumWidth = 6;
             this.NDH.Name = "NDH";
-            this.NDH.Width = 125;
+            this.NDH.ReadOnly = true;
             // 
             // NgayDuKienGiao
             // 
             this.NgayDuKienGiao.HeaderText = "Ngày dự kiến giao hàng";
             this.NgayDuKienGiao.MinimumWidth = 6;
             this.NgayDuKienGiao.Name = "NgayDuKienGiao";
-            this.NgayDuKienGiao.Width = 125;
+            this.NgayDuKienGiao.ReadOnly = true;
             // 
             // NNH
             // 
             this.NNH.HeaderText = "Ngày xác nhận đã nhận hàng";
             this.NNH.MinimumWidth = 6;
             this.NNH.Name = "NNH";
-            this.NNH.Width = 125;
+            this.NNH.ReadOnly = true;
             // 
             // TTDH
             // 
             this.TTDH.HeaderText = "Tình trạng đơn hàng";
             this.TTDH.MinimumWidth = 6;
             this.TTDH.Name = "TTDH";
-            this.TTDH.Width = 125;
+            this.TTDH.ReadOnly = true;
             // 
             // LyDo
             // 
             this.LyDo.HeaderText = "Lý do";
             this.LyDo.MinimumWidth = 6;
             this.LyDo.Name = "LyDo";
-            this.LyDo.Width = 125;
+            this.LyDo.ReadOnly = true;
             // 
             // PTTT
             // 
             this.PTTT.HeaderText = "Phương thức thanh toán";
             this.PTTT.MinimumWidth = 6;
             this.PTTT.Name = "PTTT";
-            this.PTTT.Width = 125;
+            this.PTTT.ReadOnly = true;
             // 
             // NVGH
             // 
             this.NVGH.HeaderText = "Nhân viên giao hàng";
             this.NVGH.MinimumWidth = 6;
             this.NVGH.Name = "NVGH";
-            this.NVGH.Width = 125;
+            this.NVGH.ReadOnly = true;
             // 
             // CPVN
             // 
             this.CPVN.HeaderText = "Chi phí vận chuyển";
             this.CPVN.MinimumWidth = 6;
             this.CPVN.Name = "CPVN";
-            this.CPVN.Width = 125;
+            this.CPVN.ReadOnly = true;
             // 
             // lblUserName
             // 
