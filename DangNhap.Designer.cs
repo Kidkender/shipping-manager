@@ -35,6 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnlogin = new System.Windows.Forms.Button();
+            this.btnwithguess = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -94,7 +95,7 @@
             // 
             this.btnlogin.BackColor = System.Drawing.Color.LawnGreen;
             this.btnlogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlogin.Location = new System.Drawing.Point(663, 341);
+            this.btnlogin.Location = new System.Drawing.Point(472, 355);
             this.btnlogin.Name = "btnlogin";
             this.btnlogin.Size = new System.Drawing.Size(191, 47);
             this.btnlogin.TabIndex = 10;
@@ -102,11 +103,24 @@
             this.btnlogin.UseVisualStyleBackColor = false;
             this.btnlogin.Click += new System.EventHandler(this.btnlogin_Click);
             // 
+            // btnwithguess
+            // 
+            this.btnwithguess.BackColor = System.Drawing.Color.LawnGreen;
+            this.btnwithguess.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnwithguess.Location = new System.Drawing.Point(809, 355);
+            this.btnwithguess.Name = "btnwithguess";
+            this.btnwithguess.Size = new System.Drawing.Size(191, 47);
+            this.btnwithguess.TabIndex = 12;
+            this.btnwithguess.Text = "Đăng nhập";
+            this.btnwithguess.UseVisualStyleBackColor = false;
+            this.btnwithguess.Click += new System.EventHandler(this.btnwithguess_Click);
+            // 
             // DangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1561, 841);
+            this.Controls.Add(this.btnwithguess);
             this.Controls.Add(this.btnlogin);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -132,6 +146,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnlogin;
+        private System.Windows.Forms.Button btnwithguess;
     }
 }
 
