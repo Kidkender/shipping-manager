@@ -52,6 +52,7 @@ namespace QLVNNhaNam
                     {
                         MessageBox.Show("Đăng nhập thành công!");
                         TaiKhoanNhanVienGIaoHang taiKhoanNhanVienGiaoHangForm = new TaiKhoanNhanVienGIaoHang(email);
+                        taiKhoanNhanVienGiaoHangForm.emailNv=email;
                         taiKhoanNhanVienGiaoHangForm.Show();
                         this.Hide();
                     }
