@@ -66,6 +66,7 @@ namespace QLVNNhaNam
         {
             DangNhap dnk = new DangNhap();
             dnk.Show();
+            this.Hide();
         }
 
         public string GetMaKHByEmail(string email)

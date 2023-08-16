@@ -70,6 +70,7 @@ namespace QLVNNhaNam
         {
             DangNhap_Khach dnk = new DangNhap_Khach();
             dnk.Show();
+            this.Hide();
         }
     }
 }

@@ -56,11 +56,11 @@
             this.NVGH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPVN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblUserName = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtMaDH = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnlogout = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -82,6 +82,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnlogout);
             this.tabPage1.Controls.Add(this.btnDoiHang);
             this.tabPage1.Controls.Add(this.btnKhieuBai);
             this.tabPage1.Controls.Add(this.btnXacNhan);
@@ -91,7 +92,6 @@
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.lblUserName);
-            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.txtMaDH);
             this.tabPage1.Controls.Add(this.label2);
@@ -357,22 +357,13 @@
             // lblUserName
             // 
             this.lblUserName.AutoSize = true;
-            this.lblUserName.Location = new System.Drawing.Point(109, 18);
+            this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUserName.Location = new System.Drawing.Point(159, 26);
             this.lblUserName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(111, 16);
+            this.lblUserName.Size = new System.Drawing.Size(232, 32);
             this.lblUserName.TabIndex = 9;
             this.lblUserName.Text = "Nguyễn Văn Test";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 18);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Xin chào";
             // 
             // pictureBox1
             // 
@@ -414,6 +405,16 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Phương thức thanh toán";
             // 
+            // btnlogout
+            // 
+            this.btnlogout.Location = new System.Drawing.Point(1003, 31);
+            this.btnlogout.Name = "btnlogout";
+            this.btnlogout.Size = new System.Drawing.Size(172, 33);
+            this.btnlogout.TabIndex = 20;
+            this.btnlogout.Text = "Đăng xuất";
+            this.btnlogout.UseVisualStyleBackColor = true;
+            this.btnlogout.Click += new System.EventHandler(this.btnlogout_Click);
+            // 
             // GiaoKhachHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -448,7 +449,6 @@
         private System.Windows.Forms.DataGridView dgvDSDonHang;
         private System.Windows.Forms.DataGridView dgvDSSanPham;
         private System.Windows.Forms.Label lblUserName;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox cbxPTTT;
@@ -472,5 +472,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PTTT;
         private System.Windows.Forms.DataGridViewTextBoxColumn NVGH;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPVN;
+        private System.Windows.Forms.Button btnlogout;
     }
 }

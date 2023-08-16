@@ -208,7 +208,9 @@
             // 
             // dgvDSDonHang
             // 
+            this.dgvDSDonHang.AllowUserToAddRows = false;
             this.dgvDSDonHang.AllowUserToDeleteRows = false;
+            this.dgvDSDonHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDSDonHang.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvDSDonHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSDonHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -224,6 +226,7 @@
             this.dgvDSDonHang.Location = new System.Drawing.Point(23, 29);
             this.dgvDSDonHang.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDSDonHang.Name = "dgvDSDonHang";
+            this.dgvDSDonHang.ReadOnly = true;
             this.dgvDSDonHang.RowHeadersWidth = 51;
             this.dgvDSDonHang.Size = new System.Drawing.Size(1216, 346);
             this.dgvDSDonHang.TabIndex = 13;
@@ -236,7 +239,7 @@
             this.STT.HeaderText = "STT";
             this.STT.MinimumWidth = 6;
             this.STT.Name = "STT";
-            this.STT.Width = 40;
+            this.STT.ReadOnly = true;
             // 
             // MaDH
             // 
@@ -244,7 +247,7 @@
             this.MaDH.HeaderText = "Mã đơn hàng";
             this.MaDH.MinimumWidth = 6;
             this.MaDH.Name = "MaDH";
-            this.MaDH.Width = 125;
+            this.MaDH.ReadOnly = true;
             // 
             // Ngaydathang
             // 
@@ -252,7 +255,7 @@
             this.Ngaydathang.HeaderText = "Ngày đặt hàng";
             this.Ngaydathang.MinimumWidth = 6;
             this.Ngaydathang.Name = "Ngaydathang";
-            this.Ngaydathang.Width = 125;
+            this.Ngaydathang.ReadOnly = true;
             // 
             // NgayDuKienGiao
             // 
@@ -260,7 +263,7 @@
             this.NgayDuKienGiao.HeaderText = "Ngày dự kiến giao hàng";
             this.NgayDuKienGiao.MinimumWidth = 6;
             this.NgayDuKienGiao.Name = "NgayDuKienGiao";
-            this.NgayDuKienGiao.Width = 125;
+            this.NgayDuKienGiao.ReadOnly = true;
             // 
             // NgayNhanHang
             // 
@@ -268,7 +271,7 @@
             this.NgayNhanHang.HeaderText = "Ngày xác nhận đã nhận hàng";
             this.NgayNhanHang.MinimumWidth = 6;
             this.NgayNhanHang.Name = "NgayNhanHang";
-            this.NgayNhanHang.Width = 125;
+            this.NgayNhanHang.ReadOnly = true;
             // 
             // TinhtrangDH
             // 
@@ -276,7 +279,7 @@
             this.TinhtrangDH.HeaderText = "Tình trạng đơn hàng";
             this.TinhtrangDH.MinimumWidth = 6;
             this.TinhtrangDH.Name = "TinhtrangDH";
-            this.TinhtrangDH.Width = 125;
+            this.TinhtrangDH.ReadOnly = true;
             // 
             // LyDo
             // 
@@ -284,7 +287,7 @@
             this.LyDo.HeaderText = "Lý do";
             this.LyDo.MinimumWidth = 6;
             this.LyDo.Name = "LyDo";
-            this.LyDo.Width = 125;
+            this.LyDo.ReadOnly = true;
             // 
             // PTTT
             // 
@@ -292,7 +295,7 @@
             this.PTTT.HeaderText = "Phương thức thanh toán";
             this.PTTT.MinimumWidth = 6;
             this.PTTT.Name = "PTTT";
-            this.PTTT.Width = 125;
+            this.PTTT.ReadOnly = true;
             // 
             // ChiphiVC
             // 
@@ -300,7 +303,7 @@
             this.ChiphiVC.HeaderText = "Chi phí vận chuyển";
             this.ChiphiVC.MinimumWidth = 6;
             this.ChiphiVC.Name = "ChiphiVC";
-            this.ChiphiVC.Width = 125;
+            this.ChiphiVC.ReadOnly = true;
             // 
             // TaiKhoanNhanVienGIaoHang
             // 

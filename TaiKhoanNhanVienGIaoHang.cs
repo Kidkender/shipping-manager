@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace QLVNNhaNam
             LoadEmployeeInfo(email);
 
             LoadOrderData(email);
+            dgvDSDonHang.CellFormatting += dgvDSDonHang_CellFormatting;
 
         }
 
@@ -34,6 +36,26 @@ namespace QLVNNhaNam
         {
 
         }
+
+        private void dgvDSDonHang_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == dgvDSDonHang.Columns["Ngaydathang"].Index ||
+                e.ColumnIndex == dgvDSDonHang.Columns["Ngaydukiengiao"].Index ||
+                e.ColumnIndex == dgvDSDonHang.Columns["NgayNhanHang"].Index)
+            {
+                if (e.Value != null)
+                {
+                    string dateString = e.Value.ToString();
+                    DateTime date;
+                    if (DateTime.TryParseExact(dateString, "MM/dd/yyyy h:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    {
+                        e.Value = date.ToString("dd/MM/yyyy");
+                        e.FormattingApplied = true;
+                    }
+                }
+            }
+        }
+
 
         private void LoadOrderData(string email)
         {
@@ -56,15 +78,21 @@ namespace QLVNNhaNam
                     adapter.Fill(dataTable);
 
                     dataTable.Columns.Add("STT", typeof(int));
+                    //dataTable.Columns.Add("NgaydukiengiaoFormatted", typeof(string)); // Tạo cột mới có kiểu chuỗi
+                    // dataTable.Columns["Ngaydukiengiao"].DataType = typeof(string);
+
+
                     for (int i = 0; i < dataTable.Rows.Count; i++)
                     {
                         dataTable.Rows[i]["STT"] = i + 1;
                     }
+
                     // Gán dữ liệu vào DataGridView
 
                     dgvDSDonHang.DataSource = dataTable;
-
-
+                    dgvDSDonHang.Columns["Ngaydathang"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    dgvDSDonHang.Columns["NgayDuKienGiao"].DefaultCellStyle.Format = "dd/MM/yyyy";
+                    dgvDSDonHang.Columns["NgayNhanHang"].DefaultCellStyle.Format = "dd/MM/yyyy";
                 }
             }
         }
@@ -156,7 +184,9 @@ namespace QLVNNhaNam
             {
                 // Lấy giá trị MaDH từ dòng được chọn
                 string maDH = dgvDSDonHang.Rows[e.RowIndex].Cells["MaDH"].Value.ToString();
-                btnKhieuBai.Enabled=true;
+                string Ngaydathang = dgvDSDonHang.Rows[e.RowIndex].Cells["Ngaydathang"].Value.ToString();
+
+                btnKhieuBai.Enabled = true;
                 // In giá trị MaDH ra màn hình
                 MessageBox.Show("MaDH của dòng được chọn: " + maDH, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -290,7 +320,7 @@ namespace QLVNNhaNam
                 Console.WriteLine(maDH);
 
                 KhieuNaiDonHang kn = new KhieuNaiDonHang();
-                kn.maDh=maDH;
+                kn.maDh = maDH;
                 kn.EmailNV = emailNv;
                 kn.Show();
                 this.Hide();

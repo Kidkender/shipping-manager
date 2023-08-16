@@ -128,6 +128,16 @@ namespace QLVNNhaNam
 
         public void reloadData()
         {
+            var khachHang = conectionDB.KhachHangs.FirstOrDefault(kh => kh.MaKH == maKH);
+            if (khachHang != null)
+            {
+                lblUserName.Text = "Xin chào: " + khachHang.TenKH; // Hiển thị tên khách hàng trong Label
+            }
+            else
+            {
+                lblUserName.Text = "Khách hàng không tồn tại"; // Xử lý khi không tìm thấy mã khách hàng
+            }
+
             dgvDSDonHang.Rows.Clear();
 
             var query = (from dh in conectionDB.DonHangs
@@ -347,6 +357,13 @@ namespace QLVNNhaNam
         private void dgvDSDonHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnlogout_Click(object sender, EventArgs e)
+        {
+            DangNhap_Khach dnk = new DangNhap_Khach();
+            dnk.Show();
+            this.Hide();
         }
     }
 }
