@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -15,7 +16,7 @@ namespace QLVNNhaNam
     public partial class DangNhap : Form
 
     {
-        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
+        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
 
         public DangNhap()
         {

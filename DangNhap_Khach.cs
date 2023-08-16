@@ -14,7 +14,7 @@ namespace QLVNNhaNam
 {
     public partial class DangNhap_Khach : Form
     {
-        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
+        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
 
         public DangNhap_Khach()
         {

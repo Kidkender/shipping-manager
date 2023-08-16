@@ -17,7 +17,7 @@ namespace QLVNNhaNam
 {
     public partial class TaiKhoanNhanVienGIaoHang : Form
     {
-        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
+        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
 
         public TaiKhoanNhanVienGIaoHang(string email)
         {
@@ -291,6 +291,7 @@ namespace QLVNNhaNam
 
                 KhieuNaiDonHang kn = new KhieuNaiDonHang();
                 kn.maDh=maDH;
+                kn.EmailNV = emailNv;
                 kn.Show();
                 this.Hide();
             }

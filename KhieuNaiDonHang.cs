@@ -14,9 +14,12 @@ namespace QLVNNhaNam
 {
     public partial class KhieuNaiDonHang : Form
     {
-        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
+        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
 
         public string maDh =null;
+    
+        public string EmailNV { get; set; }
+
         public KhieuNaiDonHang()
         {
             InitializeComponent();
@@ -61,6 +64,13 @@ namespace QLVNNhaNam
         private void KhieuNaiDonHang_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TaiKhoanNhanVienGIaoHang frmnv = new TaiKhoanNhanVienGIaoHang(EmailNV);
+            frmnv.Show();
+            this.Hide();
         }
     }
 }
