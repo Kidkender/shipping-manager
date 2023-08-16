@@ -17,7 +17,7 @@ namespace QLVNNhaNam
 {
     public partial class TaiKhoanNhanVienGIaoHang : Form
     {
-        string connectionString = "Data Source=21.241.123.176,1433;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=123";
+        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
 
         public TaiKhoanNhanVienGIaoHang(string email)
         {
@@ -156,7 +156,7 @@ namespace QLVNNhaNam
             {
                 // Lấy giá trị MaDH từ dòng được chọn
                 string maDH = dgvDSDonHang.Rows[e.RowIndex].Cells["MaDH"].Value.ToString();
-
+                btnKhieuBai.Enabled=true;
                 // In giá trị MaDH ra màn hình
                 MessageBox.Show("MaDH của dòng được chọn: " + maDH, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -273,6 +273,30 @@ namespace QLVNNhaNam
                 // Hiển thị lại giao diện đăng nhập
                 DangNhap loginForm = new DangNhap();
                 loginForm.Show();
+            }
+        }
+
+        private void btnKhieuBai_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow = dgvDSDonHang.CurrentRow;
+
+            // Kiểm tra xem có hàng nào đang được chọn trong DataGridView
+            if (selectedRow != null)
+            {
+                // Lấy giá trị MaDH từ dòng đang được chọn
+                //                string maDH = dgvDSDonHang.SelectedRows[1].Cells["MaDH"].Value.ToString();
+                string maDH = selectedRow.Cells["MaDH"].Value.ToString();
+
+                Console.WriteLine(maDH);
+
+                KhieuNaiDonHang kn = new KhieuNaiDonHang();
+                kn.maDh=maDH;
+                kn.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn một đơn hàng để xác nhận.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

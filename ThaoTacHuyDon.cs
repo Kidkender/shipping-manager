@@ -142,5 +142,10 @@ namespace QLVNNhaNam
         {
             this.Close();
         }
+
+        private void ThaoTacHuyDon_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

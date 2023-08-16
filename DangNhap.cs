@@ -15,7 +15,7 @@ namespace QLVNNhaNam
     public partial class DangNhap : Form
 
     {
-        string connectionString = "Data Source=21.241.123.176,1433;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=123";
+        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
 
         public DangNhap()
         {

@@ -30,7 +30,7 @@
         {
             this.noteLyDo = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtkn = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -48,7 +48,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.richTextBox1);
+            this.groupBox1.Controls.Add(this.txtkn);
             this.groupBox1.Location = new System.Drawing.Point(69, 43);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
@@ -58,15 +58,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập lý do khiếu nại đơn hàng";
             // 
-            // richTextBox1
+            // txtkn
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(4, 19);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(581, 373);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.txtkn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtkn.Location = new System.Drawing.Point(4, 19);
+            this.txtkn.Margin = new System.Windows.Forms.Padding(4);
+            this.txtkn.Name = "txtkn";
+            this.txtkn.Size = new System.Drawing.Size(581, 373);
+            this.txtkn.TabIndex = 0;
+            this.txtkn.Text = "";
             // 
             // button3
             // 
@@ -100,6 +100,7 @@
             this.Controls.Add(this.noteLyDo);
             this.Name = "KhieuNaiDonHang";
             this.Text = "KhieuNaiDonHang";
+            this.Load += new System.EventHandler(this.KhieuNaiDonHang_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -109,7 +110,7 @@
 
         private System.Windows.Forms.RichTextBox noteLyDo;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txtkn;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
     }

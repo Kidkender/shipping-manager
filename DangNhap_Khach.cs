@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -13,7 +14,7 @@ namespace QLVNNhaNam
 {
     public partial class DangNhap_Khach : Form
     {
-        string connectionString = "Data Source=21.241.123.176,1433;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=123";
+        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
 
         public DangNhap_Khach()
         {
@@ -29,13 +30,13 @@ namespace QLVNNhaNam
         {
             string email = txtuser.Text;
             string password = txtpass.Text;
-
+            string makh = null;
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
                 // Truy vấn kiểm tra tài khoản
-                string query = "SELECT COUNT(*) FROM TaiKhoanKhachHang WHERE EmailNV = @Email AND MatKhau = @Password";
+                string query = "SELECT COUNT(*) FROM TaiKhoanKhachHang WHERE EmailKH = @Email AND MatKhau = @Password";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Email", email);
@@ -46,7 +47,10 @@ namespace QLVNNhaNam
                     if (count > 0)
                     {
                         MessageBox.Show("Đăng nhập thành công!");
+                        makh=GetMaKHByEmail(email);
+
                         GiaoKhachHang gkh = new GiaoKhachHang();
+                        gkh.maKH = makh;
                         gkh.Show();
                         this.Hide();
                     }
@@ -62,6 +66,38 @@ namespace QLVNNhaNam
         {
             DangNhap dnk = new DangNhap();
             dnk.Show();
+        }
+
+        public string GetMaKHByEmail(string email)
+        {
+            string maKH = null;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                string query = "SELECT MaKH FROM TaiKhoanKhachHang WHERE EmailKH = @Email";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            maKH = reader["MaKH"].ToString();
+                        }
+                    }
+                }
+            }
+
+            return maKH;
+        }
+
+        private void DangNhap_Khach_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

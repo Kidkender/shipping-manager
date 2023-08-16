@@ -89,6 +89,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ThaoTacHuyDon";
             this.Text = "ThaoTacHuyDon";
+            this.Load += new System.EventHandler(this.ThaoTacHuyDon_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 

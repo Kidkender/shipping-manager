@@ -30,16 +30,18 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnlogout = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtusername = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnrefresh = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnKhieuBai = new System.Windows.Forms.Button();
             this.btnXacNhan = new System.Windows.Forms.Button();
             this.dgvDSDonHang = new System.Windows.Forms.DataGridView();
-            this.txtusername = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.STT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaDH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ngaydathang = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,8 +51,6 @@
             this.LyDo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PTTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ChiphiVC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnrefresh = new System.Windows.Forms.Button();
-            this.btnlogout = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -82,6 +82,35 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // btnlogout
+            // 
+            this.btnlogout.Location = new System.Drawing.Point(538, 251);
+            this.btnlogout.Name = "btnlogout";
+            this.btnlogout.Size = new System.Drawing.Size(194, 34);
+            this.btnlogout.TabIndex = 13;
+            this.btnlogout.Text = "Đăng Xuất";
+            this.btnlogout.UseVisualStyleBackColor = true;
+            this.btnlogout.Click += new System.EventHandler(this.btnlogout_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(335, 137);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(119, 29);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Xin chào :";
+            // 
+            // txtusername
+            // 
+            this.txtusername.Enabled = false;
+            this.txtusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtusername.Location = new System.Drawing.Point(509, 132);
+            this.txtusername.Name = "txtusername";
+            this.txtusername.Size = new System.Drawing.Size(297, 34);
+            this.txtusername.TabIndex = 11;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -109,6 +138,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnrefresh
+            // 
+            this.btnrefresh.Location = new System.Drawing.Point(223, 410);
+            this.btnrefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnrefresh.Name = "btnrefresh";
+            this.btnrefresh.Size = new System.Drawing.Size(183, 58);
+            this.btnrefresh.TabIndex = 23;
+            this.btnrefresh.Text = "Làm mới";
+            this.btnrefresh.UseVisualStyleBackColor = true;
+            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
             // 
             // button3
             // 
@@ -153,6 +193,7 @@
             this.btnKhieuBai.TabIndex = 19;
             this.btnKhieuBai.Text = "Yêu cầu khiếu nại đơn hàng";
             this.btnKhieuBai.UseVisualStyleBackColor = true;
+            this.btnKhieuBai.Click += new System.EventHandler(this.btnKhieuBai_Click);
             // 
             // btnXacNhan
             // 
@@ -188,25 +229,6 @@
             this.dgvDSDonHang.TabIndex = 13;
             this.dgvDSDonHang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSDonHang_CellClick);
             this.dgvDSDonHang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDSDonHang_CellContentClick);
-            // 
-            // txtusername
-            // 
-            this.txtusername.Enabled = false;
-            this.txtusername.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtusername.Location = new System.Drawing.Point(509, 132);
-            this.txtusername.Name = "txtusername";
-            this.txtusername.Size = new System.Drawing.Size(297, 34);
-            this.txtusername.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(335, 137);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 29);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Xin chào :";
             // 
             // STT
             // 
@@ -279,27 +301,6 @@
             this.ChiphiVC.MinimumWidth = 6;
             this.ChiphiVC.Name = "ChiphiVC";
             this.ChiphiVC.Width = 125;
-            // 
-            // btnrefresh
-            // 
-            this.btnrefresh.Location = new System.Drawing.Point(223, 410);
-            this.btnrefresh.Margin = new System.Windows.Forms.Padding(4);
-            this.btnrefresh.Name = "btnrefresh";
-            this.btnrefresh.Size = new System.Drawing.Size(183, 58);
-            this.btnrefresh.TabIndex = 23;
-            this.btnrefresh.Text = "Làm mới";
-            this.btnrefresh.UseVisualStyleBackColor = true;
-            this.btnrefresh.Click += new System.EventHandler(this.btnrefresh_Click);
-            // 
-            // btnlogout
-            // 
-            this.btnlogout.Location = new System.Drawing.Point(538, 251);
-            this.btnlogout.Name = "btnlogout";
-            this.btnlogout.Size = new System.Drawing.Size(194, 34);
-            this.btnlogout.TabIndex = 13;
-            this.btnlogout.Text = "Đăng Xuất";
-            this.btnlogout.UseVisualStyleBackColor = true;
-            this.btnlogout.Click += new System.EventHandler(this.btnlogout_Click);
             // 
             // TaiKhoanNhanVienGIaoHang
             // 

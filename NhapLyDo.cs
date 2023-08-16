@@ -17,6 +17,8 @@ namespace QLVNNhaNam
     {
         public delegate void DataSavedHandler();
         public event DataSavedHandler OnDataSaved;
+        string connectionString = "Data Source=localhost;Initial Catalog=QLVC_NhaNamv2;User ID=sa;Password=1";
+
         QLVC_NhaNamv2Entities conectionDB = new QLVC_NhaNamv2Entities();
 
         public  string maDH { get; set; }

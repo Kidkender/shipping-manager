@@ -16,7 +16,8 @@ namespace QLVNNhaNam
     public partial class GiaoKhachHang : Form
     {
         QLVC_NhaNamv2Entities conectionDB = new QLVC_NhaNamv2Entities();
-        private string maKH = "KH03";
+        public string maKH ;
+
         public GiaoKhachHang()
         {
             InitializeComponent();
