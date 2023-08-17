@@ -169,12 +169,18 @@ namespace QLVNNhaNam.Service
             bool result = false;
             try
             {
+                DateTime currentDate = DateTime.Now;
+                DateTime currentDateOnly = DateTime.Today;
+
+                DateTime today = DateTime.Today;
+
                 using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
                     var donHang = context.DonHangs.FirstOrDefault(dh => dh.MaDH == maDH);
                     if (donHang != null)
                     {
                         donHang.TinhtrangDH = "đã giao";
+                        donHang.NgayNhanHang = currentDate;
                         context.SaveChanges();
                         result = true;
                     }
@@ -193,12 +199,14 @@ namespace QLVNNhaNam.Service
             try
             {
                 DateTime today = DateTime.Today;
-
+                DateTime currentDate = DateTime.Now;
+                DateTime currentDateOnly = DateTime.Today;
+                Console.WriteLine("Dang test ngay", currentDateOnly);
                 using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
                     var query = from dh in context.DonHangs
                     join nv in context.NhanViens on dh.MaNV equals nv.MaNV
-                                where nv.EmailNV == email && dh.Ngaydukiengiao == today
+                                where nv.EmailNV == email && dh.Ngaydukiengiao.Value == DateTime.Today
                                 select dh;
 
                     dataTable.Columns.Add("STT");
@@ -248,7 +256,7 @@ namespace QLVNNhaNam.Service
                 {
                     var query = from dh in context.DonHangs
                                 join nv in context.NhanViens on dh.MaNV equals nv.MaNV
-                                where nv.EmailNV == email && dh.TinhtrangDH.Contains("đổi")
+                                where nv.EmailNV == email && (dh.TinhtrangDH.Contains("đổi") || dh.TinhtrangDH.Contains("trả")) 
                                 select new
                                 {
                                     dh.MaDH,
