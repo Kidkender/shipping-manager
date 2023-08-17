@@ -38,7 +38,7 @@ namespace QLVNNhaNam
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoanKhachHang> TaiKhoanKhachHangs { get; set; }
         public virtual DbSet<TaiKhoanNhanVien> TaiKhoanNhanViens { get; set; }
-    
+
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?

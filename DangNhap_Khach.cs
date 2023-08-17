@@ -34,7 +34,7 @@ namespace QLVNNhaNam
             string makh = "";
 
             SQLService sql = new SQLService();
-            makh = sql.DangNhap_Khach(email, password);
+            makh = sql.DangNhap_Khach1(email, password);
             if (!string.IsNullOrEmpty(makh))
             {
                 MessageBox.Show("Đăng nhập thành công!");

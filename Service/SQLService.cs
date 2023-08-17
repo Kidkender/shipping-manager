@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace QLVNNhaNam.Service
 {
@@ -15,52 +16,42 @@ namespace QLVNNhaNam.Service
     {
         string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
 
-        public bool DangNhap(string email, string password)
+        public bool DangNhap1(string email,string password)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
-
                     // Truy vấn kiểm tra tài khoản
-                    string query = "SELECT COUNT(*) FROM TaiKhoanNhanVien WHERE EmailNV = @Email AND MatKhau = @Password";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@Password", password);
+                    var count = context.TaiKhoanNhanViens
+                        .Where(tk => tk.EmailNV == email && tk.MatKhau == password)
+                        .Count();
 
-                        int count = (int)command.ExecuteScalar();
-
-                        return count > 0;
-                    }
+                    return count > 0;
                 }
             }
             catch (Exception)
             {
                 return false;
             }
-        }
 
-        public string DangNhap_Khach(string email, string password)
+        }
+        public string DangNhap_Khach1(string email,string password)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (var context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
+                    var account = context.TaiKhoanKhachHangs
+                        .FirstOrDefault(tk => tk.EmailKH == email && tk.MatKhau == password);
 
-                    // Truy vấn kiểm tra tài khoản
-                    string query = "SELECT COUNT(*) FROM TaiKhoanKhachHang WHERE EmailKH = @Email AND MatKhau = @Password";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    if (account != null)
                     {
-                        command.Parameters.AddWithValue("@Email", email);
-                        command.Parameters.AddWithValue("@Password", password);
-
-                        int count = (int)command.ExecuteScalar();
-
-                        if (count > 0) return GetMaKHByEmail(email);
-                        else return "";
+                        return account.MaKH;
+                    }
+                    else
+                    {
+                        return "";
                     }
                 }
             }
@@ -68,97 +59,101 @@ namespace QLVNNhaNam.Service
             {
                 return "";
             }
+
+
         }
 
-        public string GetMaKHByEmail(string email)
+        public string GetMaKHByEmail1(string email)
         {
-            string maKH = null;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
             {
-                connection.Open();
+                var taiKhoan = context.TaiKhoanKhachHangs.FirstOrDefault(tk => tk.EmailKH == email);
 
-                string query = "SELECT MaKH FROM TaiKhoanKhachHang WHERE EmailKH = @Email";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                if (taiKhoan != null)
                 {
-                    command.Parameters.AddWithValue("@Email", email);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            maKH = reader["MaKH"].ToString();
-                        }
-                    }
+                    return taiKhoan.MaKH;
                 }
             }
 
-            return maKH;
+            return null;
         }
 
-        public DataTable LoadOrderData(string email)
+
+
+
+        public DataTable LoadOrderData1(string email)
         {
-            DataTable db = new DataTable();
+            DataTable dataTable = new DataTable();
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
+                    var query = from dh in context.DonHangs
+                                join nv in context.NhanViens on dh.MaNV equals nv.MaNV
+                                where nv.EmailNV == email
+                                select new
+                                {
+                                    dh.MaDH,
+                                    dh.Ngaydathang,
+                                    dh.Ngaydukiengiao,
+                                    dh.NgayNhanHang,
+                                    dh.TinhtrangDH,
+                                    dh.LyDo,
+                                    dh.PTTT,
+                                    dh.ChiphiVC
+                                };
 
-                    string query = "SELECT dh.MaDH, dh.Ngaydathang, dh.Ngaydukiengiao, dh.NgayNhanHang, dh.TinhtrangDH, " +
-                        "dh.LyDo, dh.PTTT, dh.ChiphiVC FROM DonHang dh " +
-                        "INNER JOIN NhanVien nv ON dh.MaNV = nv.MaNV WHERE nv.EmailNV = @Email";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    var result = query.ToList();
+
+                    dataTable.Columns.Add("STT");
+                    dataTable.Columns.Add("MaDH", typeof(string));
+                    dataTable.Columns.Add("Ngaydathang", typeof(DateTime));
+                    dataTable.Columns.Add("Ngaydukiengiao", typeof(DateTime));
+                    dataTable.Columns.Add("NgayNhanHang", typeof(DateTime));
+                    dataTable.Columns.Add("TinhtrangDH", typeof(string));
+                    dataTable.Columns.Add("LyDo", typeof(string));
+                    dataTable.Columns.Add("PTTT", typeof(string));
+                    dataTable.Columns.Add("ChiphiVC", typeof(double));
+
+                    int index = 1;
+                    foreach (var item in result)
                     {
-                        command.Parameters.AddWithValue("@Email", email);
-
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                        adapter.Fill(db);
-
-                        db.Columns.Add("STT", typeof(int));
-                        //dataTable.Columns.Add("NgaydukiengiaoFormatted", typeof(string)); // Tạo cột mới có kiểu chuỗi
-                        // dataTable.Columns["Ngaydukiengiao"].DataType = typeof(string);
-
-
-                        for (int i = 0; i < db.Rows.Count; i++)
-                        {
-                            db.Rows[i]["STT"] = i + 1;
-                        }
-
+                        dataTable.Rows.Add(
+                            index,
+                            item.MaDH,
+                            item.Ngaydathang,
+                            item.Ngaydukiengiao,
+                            item.NgayNhanHang,
+                            item.TinhtrangDH,
+                            item.LyDo,
+                            item.PTTT,
+                            item.ChiphiVC
+                        );
+                        index++;
                     }
                 }
             }
             catch (Exception)
             {
             }
-            return db;
+            return dataTable;
         }
 
-        public string LoadEmployeeInfo(string email)
+
+
+
+        public string LoadEmployeeInfo1(string email)
         {
             string result = "";
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
+                    var query = from nv in context.NhanViens
+                                where nv.EmailNV == email
+                                select nv.TenNV;
 
-                    string query = "SELECT TenNV FROM NhanVien WHERE EmailNV = @Email";
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Email", email);
-
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            string tennv = reader["TenNV"].ToString();
-                            result = tennv;
-                        }
-
-                        reader.Close();
-                    }
+                    result = query.FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -167,20 +162,21 @@ namespace QLVNNhaNam.Service
             return result;
         }
 
-        public bool UpdateTinhTrangDH(string maDH)
+
+
+        public bool UpdateTinhTrangDH1(string maDH)
         {
             bool result = false;
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
-
-                    string updateQuery = "UPDATE DonHang SET TinhtrangDH = N'đã giao' WHERE MaDH = @MaDH";
-                    using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                    var donHang = context.DonHangs.FirstOrDefault(dh => dh.MaDH == maDH);
+                    if (donHang != null)
                     {
-                        command.Parameters.AddWithValue("@MaDH", maDH);
-                        result = command.ExecuteNonQuery() > 0;
+                        donHang.TinhtrangDH = "đã giao";
+                        context.SaveChanges();
+                        result = true;
                     }
                 }
             }
@@ -190,67 +186,116 @@ namespace QLVNNhaNam.Service
             return result;
         }
 
-        public DataTable LoadOrderData_Now(string email)
+
+        public DataTable LoadOrderData_Now1(string email)
         {
-            DataTable db = new DataTable();
+            DataTable dataTable = new DataTable();
             try
             {
                 DateTime today = DateTime.Today;
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
+                    var query = from dh in context.DonHangs
+                    join nv in context.NhanViens on dh.MaNV equals nv.MaNV
+                                where nv.EmailNV == email && dh.Ngaydukiengiao == today
+                                select dh;
 
-                    string query = "SELECT * FROM DonHang dh"
-                       + "INNER JOIN NhanVien nv ON dh.MaNV = nv.MaNV WHERE nv.EmailNV = @Email AND  dh.Ngaydukiengiao = @Ngaydukiengiao"; ;
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    dataTable.Columns.Add("STT");
+                    dataTable.Columns.Add("MaDH", typeof(string));
+                    dataTable.Columns.Add("Ngaydathang", typeof(DateTime));
+                    dataTable.Columns.Add("Ngaydukiengiao", typeof(DateTime));
+                    dataTable.Columns.Add("NgayNhanHang", typeof(DateTime));
+                    dataTable.Columns.Add("TinhtrangDH", typeof(string));
+                    dataTable.Columns.Add("LyDo", typeof(string));
+                    dataTable.Columns.Add("PTTT", typeof(string));
+                    dataTable.Columns.Add("ChiphiVC", typeof(double));
+                    var result = query.ToList();
+
+                    int index = 1;
+                    foreach (var item in result)
                     {
-                        command.Parameters.AddWithValue("@Ngaydukiengiao", today);
-
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-                        adapter.Fill(db);
+                        dataTable.Rows.Add(
+                            index,
+                            item.MaDH,
+                            item.Ngaydathang,
+                            item.Ngaydukiengiao,
+                            item.NgayNhanHang,
+                            item.TinhtrangDH,
+                            item.LyDo,
+                            item.PTTT,
+                            item.ChiphiVC
+                        );
+                        index++;
                     }
                 }
             }
             catch (Exception)
             {
             }
-            return db;
+            return dataTable;
         }
 
-        public DataTable LoadOrderData_DoiHang(string email)
+
+
+
+        public DataTable LoadOrderData_DoiHang1(string email)
         {
-            DataTable db = new DataTable();
+            DataTable dataTable = new DataTable();
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (QLVC_NhaNamv2Entities context = new QLVC_NhaNamv2Entities())
                 {
-                    connection.Open();
+                    var query = from dh in context.DonHangs
+                                join nv in context.NhanViens on dh.MaNV equals nv.MaNV
+                                where nv.EmailNV == email && dh.TinhtrangDH.Contains("đổi")
+                                select new
+                                {
+                                    dh.MaDH,
+                                    dh.Ngaydathang,
+                                    dh.Ngaydukiengiao,
+                                    dh.NgayNhanHang,
+                                    dh.TinhtrangDH,
+                                    dh.LyDo,
+                                    dh.PTTT,
+                                    dh.ChiphiVC
+                                };
 
-                    string query = "SELECT dh.MaDH, dh.Ngaydathang, dh.Ngaydukiengiao, dh.NgayNhanHang, dh.TinhtrangDH, " +
-                        "dh.LyDo, dh.PTTT, dh.ChiphiVC FROM DonHang dh " +
-                        "INNER JOIN NhanVien nv ON dh.MaNV = nv.MaNV WHERE nv.EmailNV = @Email and TinhtrangDH LIKE N'%đổi%'";
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    var result = query.ToList();
+
+                    dataTable.Columns.Add("STT");
+                    dataTable.Columns.Add("MaDH", typeof(string));
+                    dataTable.Columns.Add("Ngaydathang", typeof(DateTime));
+                    dataTable.Columns.Add("Ngaydukiengiao", typeof(DateTime));
+                    dataTable.Columns.Add("NgayNhanHang", typeof(DateTime));
+                    dataTable.Columns.Add("TinhtrangDH", typeof(string));
+                    dataTable.Columns.Add("LyDo", typeof(string));
+                    dataTable.Columns.Add("PTTT", typeof(string));
+                    dataTable.Columns.Add("ChiphiVC", typeof(double));
+
+                    int index = 1;
+                    foreach (var item in result)
                     {
-                        command.Parameters.AddWithValue("@Email", email);
-
-                        SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                        adapter.Fill(db);
-
-                        db.Columns.Add("STT", typeof(int));
-                        for (int i = 0; i < db.Rows.Count; i++)
-                        {
-                            db.Rows[i]["STT"] = i + 1;
-                        }
-
+                        dataTable.Rows.Add(
+                            index,
+                            item.MaDH,
+                            item.Ngaydathang,
+                            item.Ngaydukiengiao,
+                            item.NgayNhanHang,
+                            item.TinhtrangDH,
+                            item.LyDo,
+                            item.PTTT,
+                            item.ChiphiVC
+                        );
+                        index++;
                     }
                 }
             }
             catch (Exception)
             {
             }
-            return db;
+            return dataTable;
         }
+
     }
 }
