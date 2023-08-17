@@ -202,7 +202,7 @@ namespace QLVNNhaNam
 
             ReportDonHang reportDonHang = new ReportDonHang();
             reportDonHang.SetDataSource(originalDataTable);
-            reportDonHang.SetDatabaseLogon("sa", "123");
+            reportDonHang.SetDatabaseLogon("sa", "1");
 
             formReport form = new formReport();
             form.crystalReportViewer1.ReportSource = reportDonHang;
