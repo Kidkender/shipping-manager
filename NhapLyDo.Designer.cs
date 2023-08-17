@@ -49,31 +49,27 @@
             // noteLyDo
             // 
             this.noteLyDo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noteLyDo.Location = new System.Drawing.Point(4, 19);
-            this.noteLyDo.Margin = new System.Windows.Forms.Padding(4);
+            this.noteLyDo.Location = new System.Drawing.Point(3, 16);
             this.noteLyDo.Name = "noteLyDo";
-            this.noteLyDo.Size = new System.Drawing.Size(1093, 154);
+            this.noteLyDo.Size = new System.Drawing.Size(820, 125);
             this.noteLyDo.TabIndex = 0;
             this.noteLyDo.Text = "";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.noteLyDo);
-            this.groupBox1.Location = new System.Drawing.Point(27, 483);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(20, 392);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1101, 177);
+            this.groupBox1.Size = new System.Drawing.Size(826, 144);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập lý do đổi/trả đơn hàng";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(632, 686);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(474, 557);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 28);
+            this.button1.Size = new System.Drawing.Size(104, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "Hủy";
             this.button1.UseVisualStyleBackColor = true;
@@ -81,10 +77,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(355, 686);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(266, 557);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(260, 28);
+            this.button2.Size = new System.Drawing.Size(195, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Gửi lý do đổi/trả đơn hàng.";
             this.button2.UseVisualStyleBackColor = true;
@@ -106,12 +101,11 @@
             this.LyDo,
             this.PTTT,
             this.CPVN});
-            this.dgvDSDonHang.Location = new System.Drawing.Point(27, 48);
-            this.dgvDSDonHang.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvDSDonHang.Location = new System.Drawing.Point(20, 39);
             this.dgvDSDonHang.Name = "dgvDSDonHang";
             this.dgvDSDonHang.ReadOnly = true;
             this.dgvDSDonHang.RowHeadersWidth = 51;
-            this.dgvDSDonHang.Size = new System.Drawing.Size(1097, 412);
+            this.dgvDSDonHang.Size = new System.Drawing.Size(823, 335);
             this.dgvDSDonHang.TabIndex = 3;
             // 
             // STT
@@ -179,16 +173,15 @@
             // 
             // NhapLyDo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 779);
+            this.ClientSize = new System.Drawing.Size(897, 633);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvDSDonHang);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "NhapLyDo";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Nhập lý do";
             this.Load += new System.EventHandler(this.NhapLyDo_Load);
             this.groupBox1.ResumeLayout(false);
