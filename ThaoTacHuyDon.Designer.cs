@@ -37,10 +37,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(112, 457);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Location = new System.Drawing.Point(84, 371);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(260, 28);
+            this.button2.Size = new System.Drawing.Size(195, 23);
             this.button2.TabIndex = 6;
             this.button2.Text = "Gửi yêu cầu hủy đơn hàng.";
             this.button2.UseVisualStyleBackColor = true;
@@ -48,10 +47,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 457);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(298, 371);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 28);
+            this.button1.Size = new System.Drawing.Size(104, 23);
             this.button1.TabIndex = 5;
             this.button1.Text = "Hủy";
             this.button1.UseVisualStyleBackColor = true;
@@ -60,11 +58,9 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.noteLyDo);
-            this.groupBox1.Location = new System.Drawing.Point(53, 29);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(40, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(589, 396);
+            this.groupBox1.Size = new System.Drawing.Size(442, 322);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập lý do hủy đơn hàng";
@@ -72,22 +68,23 @@
             // noteLyDo
             // 
             this.noteLyDo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.noteLyDo.Location = new System.Drawing.Point(4, 19);
-            this.noteLyDo.Margin = new System.Windows.Forms.Padding(4);
+            this.noteLyDo.Location = new System.Drawing.Point(3, 16);
             this.noteLyDo.Name = "noteLyDo";
-            this.noteLyDo.Size = new System.Drawing.Size(581, 373);
+            this.noteLyDo.Size = new System.Drawing.Size(436, 303);
             this.noteLyDo.TabIndex = 0;
             this.noteLyDo.Text = "";
             // 
             // ThaoTacHuyDon
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 543);
+            this.ClientSize = new System.Drawing.Size(529, 441);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ThaoTacHuyDon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ThaoTacHuyDon";
             this.Load += new System.EventHandler(this.ThaoTacHuyDon_Load);
             this.groupBox1.ResumeLayout(false);

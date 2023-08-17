@@ -39,7 +39,7 @@ namespace QLVNNhaNam
             string password = txtpassword.Text;
 
             SQLService sql = new SQLService();
-            var result = sql.DangNhap(email, password);
+            var result = sql.DangNhap1(email, password);
             if (result)
             {
                 MessageBox.Show("Đăng nhập thành công!");

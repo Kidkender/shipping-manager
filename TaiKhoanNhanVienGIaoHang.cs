@@ -61,13 +61,15 @@ namespace QLVNNhaNam
         private void LoadOrderData(string email)
         {
             SQLService sql = new SQLService();
-            var data = sql.LoadOrderData(email);
+            var data = sql.LoadOrderData1(email);
             dgvDSDonHang.DataSource = data;
             dgvDSDonHang.Columns["Ngaydathang"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDSDonHang.Columns["NgayDuKienGiao"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDSDonHang.Columns["NgayNhanHang"].DefaultCellStyle.Format = "dd/MM/yyyy";
             originalDataTable = data;
         }
+
+        
 
         public string emailNv;
         public string getEmail(string email)
@@ -79,7 +81,7 @@ namespace QLVNNhaNam
         private void LoadEmployeeInfo(string email)
         {
             SQLService sql = new SQLService();
-            var data = sql.LoadEmployeeInfo(email);
+            var data = sql.LoadEmployeeInfo1(email);
             txtusername.Text = data;
         }
 
@@ -111,7 +113,7 @@ namespace QLVNNhaNam
         private void UpdateTinhTrangDH(string maDH)
         {
             SQLService sql = new SQLService();
-            sql.UpdateTinhTrangDH(maDH);
+            sql.UpdateTinhTrangDH1(maDH);
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -141,7 +143,7 @@ namespace QLVNNhaNam
         private void button2_Click(object sender, EventArgs e)
         {
             SQLService sql = new SQLService();
-            var data = sql.LoadOrderData_Now(emailNv);
+            var data = sql.LoadOrderData_Now1(emailNv);
             dgvDSDonHang.DataSource = data;
             originalDataTable = data;
         }
@@ -156,10 +158,12 @@ namespace QLVNNhaNam
         private void button3_Click(object sender, EventArgs e)
         {
             SQLService sql = new SQLService();
-            var data = sql.LoadOrderData_DoiHang(emailNv);
+            var data = sql.LoadOrderData_DoiHang1(emailNv);
             dgvDSDonHang.DataSource = data;
             originalDataTable = data;
         }
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -198,6 +202,7 @@ namespace QLVNNhaNam
 
             ReportDonHang reportDonHang = new ReportDonHang();
             reportDonHang.SetDataSource(originalDataTable);
+            reportDonHang.SetDatabaseLogon("sa", "123");
 
             formReport form = new formReport();
             form.crystalReportViewer1.ReportSource = reportDonHang;

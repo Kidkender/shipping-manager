@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,8 @@ namespace QLVNNhaNam
 {
     public partial class KhieuNaiDonHang : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
-
+        QLVC_NhaNamv2Entities conectionDB = new QLVC_NhaNamv2Entities();
+      
         public string maDh =null;
     
         public string EmailNV { get; set; }
@@ -36,28 +37,27 @@ namespace QLVNNhaNam
             }
 
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+           
+
+            try
             {
-                connection.Open();
+                var orderToUpdate = conectionDB.DonHangs.FirstOrDefault(dh => dh.MaDH == maDh);
 
-                string query = "UPDATE DonHang SET LyDo = @LyDo WHERE MaDH = @MaDH";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                if (orderToUpdate != null)
                 {
-                    command.Parameters.AddWithValue("@LyDo", noiDung);
-                    command.Parameters.AddWithValue("@MaDH", maDh);
+                    orderToUpdate.LyDo = noiDung;
+                    conectionDB.SaveChanges();
 
-                    int rowsAffected = command.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Cập nhật nội dung thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tìm thấy mã đơn hàng để cập nhật nội dung.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    MessageBox.Show("Cập nhật nội dung thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy mã đơn hàng để cập nhật nội dung.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
             }
         }
 
