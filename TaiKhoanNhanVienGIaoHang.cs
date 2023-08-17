@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using CrystalDecisions.CrystalReports.Engine;
+using QLVNNhaNam.Report;
+using QLVNNhaNam.Service;
 
 namespace QLVNNhaNam
 {
     public partial class TaiKhoanNhanVienGIaoHang : Form
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["connectDB"].ConnectionString;
-
         public TaiKhoanNhanVienGIaoHang(string email)
         {
             InitializeComponent();
@@ -56,46 +58,17 @@ namespace QLVNNhaNam
             }
         }
 
-
         private void LoadOrderData(string email)
         {
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT dh.MaDH, dh.Ngaydathang, dh.Ngaydukiengiao, dh.NgayNhanHang, dh.TinhtrangDH, " +
-                    "dh.LyDo, dh.PTTT, dh.ChiphiVC FROM DonHang dh " +
-                    "INNER JOIN NhanVien nv ON dh.MaNV = nv.MaNV WHERE nv.EmailNV = @Email";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-
-
-                    adapter.Fill(dataTable);
-
-                    dataTable.Columns.Add("STT", typeof(int));
-                    //dataTable.Columns.Add("NgaydukiengiaoFormatted", typeof(string)); // Tạo cột mới có kiểu chuỗi
-                    // dataTable.Columns["Ngaydukiengiao"].DataType = typeof(string);
-
-
-                    for (int i = 0; i < dataTable.Rows.Count; i++)
-                    {
-                        dataTable.Rows[i]["STT"] = i + 1;
-                    }
-
-                    // Gán dữ liệu vào DataGridView
-
-                    dgvDSDonHang.DataSource = dataTable;
-                    dgvDSDonHang.Columns["Ngaydathang"].DefaultCellStyle.Format = "dd/MM/yyyy";
-                    dgvDSDonHang.Columns["NgayDuKienGiao"].DefaultCellStyle.Format = "dd/MM/yyyy";
-                    dgvDSDonHang.Columns["NgayNhanHang"].DefaultCellStyle.Format = "dd/MM/yyyy";
-                }
-            }
+            SQLService sql = new SQLService();
+            var data = sql.LoadOrderData(email);
+            dgvDSDonHang.DataSource = data;
+            dgvDSDonHang.Columns["Ngaydathang"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvDSDonHang.Columns["NgayDuKienGiao"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dgvDSDonHang.Columns["NgayNhanHang"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            originalDataTable = data;
         }
+
         public string emailNv;
         public string getEmail(string email)
         {
@@ -105,26 +78,9 @@ namespace QLVNNhaNam
 
         private void LoadEmployeeInfo(string email)
         {
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT TenNV FROM NhanVien WHERE EmailNV = @Email";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        string tennv = reader["TenNV"].ToString();
-                        txtusername.Text = tennv;
-                    }
-
-                    reader.Close();
-                }
-            }
+            SQLService sql = new SQLService();
+            var data = sql.LoadEmployeeInfo(email);
+            txtusername.Text = data;
         }
 
         private void btnXacNhan_Click(object sender, EventArgs e)
@@ -154,18 +110,8 @@ namespace QLVNNhaNam
 
         private void UpdateTinhTrangDH(string maDH)
         {
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string updateQuery = "UPDATE DonHang SET TinhtrangDH = N'đã giao' WHERE MaDH = @MaDH";
-                using (SqlCommand command = new SqlCommand(updateQuery, connection))
-                {
-                    command.Parameters.AddWithValue("@MaDH", maDH);
-                    command.ExecuteNonQuery();
-                }
-            }
+            SQLService sql = new SQLService();
+            sql.UpdateTinhTrangDH(maDH);
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -194,101 +140,68 @@ namespace QLVNNhaNam
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DateTime today = DateTime.Today;
-
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT * FROM DonHang WHERE Ngaydukiengiao = @Ngaydukiengiao";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Ngaydukiengiao", today);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-                    adapter.Fill(dataTable);
-
-                    // Gán dữ liệu vào DataGridView
-                    dgvDSDonHang.DataSource = dataTable;
-                }
-            }
+            SQLService sql = new SQLService();
+            var data = sql.LoadOrderData_Now(emailNv);
+            dgvDSDonHang.DataSource = data;
+            originalDataTable = data;
         }
 
         private void btnrefresh_Click(object sender, EventArgs e)
         {
             LoadOrderData(emailNv);
         }
+
         private DataTable originalDataTable; // Lưu trữ dữ liệu gốc
 
         private void button3_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT dh.MaDH, dh.Ngaydathang, dh.Ngaydukiengiao, dh.NgayNhanHang, dh.TinhtrangDH, " +
-                    "dh.LyDo, dh.PTTT, dh.ChiphiVC FROM DonHang dh " +
-                    "INNER JOIN NhanVien nv ON dh.MaNV = nv.MaNV WHERE nv.EmailNV = @Email and TinhtrangDH LIKE N'%đổi%'";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", emailNv);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(command);
-                    DataTable dataTable = new DataTable();
-
-
-                    adapter.Fill(dataTable);
-
-                    dataTable.Columns.Add("STT", typeof(int));
-                    for (int i = 0; i < dataTable.Rows.Count; i++)
-                    {
-                        dataTable.Rows[i]["STT"] = i + 1;
-                    }
-                    // Gán dữ liệu vào DataGridView
-
-                    dgvDSDonHang.DataSource = dataTable;
-
-
-                }
-            }
+            SQLService sql = new SQLService();
+            var data = sql.LoadOrderData_DoiHang(emailNv);
+            dgvDSDonHang.DataSource = data;
+            originalDataTable = data;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel Files|*.xlsx";
-            saveFileDialog.Title = "Chọn vị trí lưu tệp Excel";
+            //SaveFileDialog saveFileDialog = new SaveFileDialog();
+            //saveFileDialog.Filter = "Excel Files|*.xlsx";
+            //saveFileDialog.Title = "Chọn vị trí lưu tệp Excel";
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                using (ExcelPackage excelPackage = new ExcelPackage())
-                {
-                    ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
+            //if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    using (ExcelPackage excelPackage = new ExcelPackage())
+            //    {
+            //        ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
 
-                    // Ghi tên cột vào tệp Excel
-                    for (int col = 0; col < dgvDSDonHang.Columns.Count; col++)
-                    {
-                        worksheet.Cells[1, col + 1].Value = dgvDSDonHang.Columns[col].HeaderText;
-                    }
+            //        // Ghi tên cột vào tệp Excel
+            //        for (int col = 0; col < dgvDSDonHang.Columns.Count; col++)
+            //        {
+            //            worksheet.Cells[1, col + 1].Value = dgvDSDonHang.Columns[col].HeaderText;
+            //        }
 
-                    // Ghi dữ liệu từ DataGridView vào tệp Excel
-                    for (int row = 0; row < dgvDSDonHang.Rows.Count; row++)
-                    {
-                        for (int col = 0; col < dgvDSDonHang.Columns.Count; col++)
-                        {
-                            worksheet.Cells[row + 2, col + 1].Value = dgvDSDonHang.Rows[row].Cells[col].Value;
-                        }
-                    }
+            //        // Ghi dữ liệu từ DataGridView vào tệp Excel
+            //        for (int row = 0; row < dgvDSDonHang.Rows.Count; row++)
+            //        {
+            //            for (int col = 0; col < dgvDSDonHang.Columns.Count; col++)
+            //            {
+            //                worksheet.Cells[row + 2, col + 1].Value = dgvDSDonHang.Rows[row].Cells[col].Value;
+            //            }
+            //        }
 
-                    // Lưu tệp Excel
-                    FileInfo excelFile = new FileInfo(saveFileDialog.FileName);
-                    excelPackage.SaveAs(excelFile);
-                }
+            //        // Lưu tệp Excel
+            //        FileInfo excelFile = new FileInfo(saveFileDialog.FileName);
+            //        excelPackage.SaveAs(excelFile);
+            //    }
 
-                MessageBox.Show("Dữ liệu đã được xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //    MessageBox.Show("Dữ liệu đã được xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+
+            ReportDonHang reportDonHang = new ReportDonHang();
+            reportDonHang.SetDataSource(originalDataTable);
+
+            formReport form = new formReport();
+            form.crystalReportViewer1.ReportSource = reportDonHang;
+            form.ShowDialog();
         }
 
         private void btnlogout_Click(object sender, EventArgs e)
