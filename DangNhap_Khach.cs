@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLVNNhaNam.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -30,35 +31,21 @@ namespace QLVNNhaNam
         {
             string email = txtuser.Text;
             string password = txtpass.Text;
-            string makh = null;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string makh = "";
+
+            SQLService sql = new SQLService();
+            makh = sql.DangNhap_Khach(email, password);
+            if (!string.IsNullOrEmpty(makh))
             {
-                connection.Open();
-
-                // Truy vấn kiểm tra tài khoản
-                string query = "SELECT COUNT(*) FROM TaiKhoanKhachHang WHERE EmailKH = @Email AND MatKhau = @Password";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-                    command.Parameters.AddWithValue("@Password", password);
-
-                    int count = (int)command.ExecuteScalar();
-
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Đăng nhập thành công!");
-                        makh=GetMaKHByEmail(email);
-
-                        GiaoKhachHang gkh = new GiaoKhachHang();
-                        gkh.maKH = makh;
-                        gkh.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
-                    }
-                }
+                MessageBox.Show("Đăng nhập thành công!");
+                GiaoKhachHang gkh = new GiaoKhachHang();
+                gkh.maKH = makh;
+                gkh.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
             }
         }
 
@@ -67,33 +54,6 @@ namespace QLVNNhaNam
             DangNhap dnk = new DangNhap();
             dnk.Show();
             this.Hide();
-        }
-
-        public string GetMaKHByEmail(string email)
-        {
-            string maKH = null;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-
-                string query = "SELECT MaKH FROM TaiKhoanKhachHang WHERE EmailKH = @Email";
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            maKH = reader["MaKH"].ToString();
-                        }
-                    }
-                }
-            }
-
-            return maKH;
         }
 
         private void DangNhap_Khach_Load(object sender, EventArgs e)

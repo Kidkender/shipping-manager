@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLVNNhaNam.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -37,32 +38,19 @@ namespace QLVNNhaNam
             string email = txtemail.Text;
             string password = txtpassword.Text;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            SQLService sql = new SQLService();
+            var result = sql.DangNhap(email, password);
+            if (result)
             {
-                connection.Open();
-
-                // Truy vấn kiểm tra tài khoản
-                string query = "SELECT COUNT(*) FROM TaiKhoanNhanVien WHERE EmailNV = @Email AND MatKhau = @Password";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Email", email);
-                    command.Parameters.AddWithValue("@Password", password);
-
-                    int count = (int)command.ExecuteScalar();
-
-                    if (count > 0)
-                    {
-                        MessageBox.Show("Đăng nhập thành công!");
-                        TaiKhoanNhanVienGIaoHang taiKhoanNhanVienGiaoHangForm = new TaiKhoanNhanVienGIaoHang(email);
-                        taiKhoanNhanVienGiaoHangForm.emailNv=email;
-                        taiKhoanNhanVienGiaoHangForm.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
-                    }
-                }
+                MessageBox.Show("Đăng nhập thành công!");
+                TaiKhoanNhanVienGIaoHang taiKhoanNhanVienGiaoHangForm = new TaiKhoanNhanVienGIaoHang(email);
+                taiKhoanNhanVienGiaoHangForm.emailNv = email;
+                taiKhoanNhanVienGiaoHangForm.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Đăng nhập thất bại. Vui lòng kiểm tra lại email và mật khẩu.");
             }
         }
 
