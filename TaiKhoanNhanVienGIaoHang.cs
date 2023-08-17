@@ -66,6 +66,7 @@ namespace QLVNNhaNam
             dgvDSDonHang.Columns["Ngaydathang"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDSDonHang.Columns["NgayDuKienGiao"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvDSDonHang.Columns["NgayNhanHang"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            originalDataTable = data;
         }
 
         public string emailNv;
@@ -142,6 +143,7 @@ namespace QLVNNhaNam
             SQLService sql = new SQLService();
             var data = sql.LoadOrderData_Now(emailNv);
             dgvDSDonHang.DataSource = data;
+            originalDataTable = data;
         }
 
         private void btnrefresh_Click(object sender, EventArgs e)
@@ -156,6 +158,7 @@ namespace QLVNNhaNam
             SQLService sql = new SQLService();
             var data = sql.LoadOrderData_DoiHang(emailNv);
             dgvDSDonHang.DataSource = data;
+            originalDataTable = data;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -193,25 +196,8 @@ namespace QLVNNhaNam
             //    MessageBox.Show("Dữ liệu đã được xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //}
 
-            DataTable dataTable = new DataTable();
-
-            foreach (DataGridViewColumn column in dgvDSDonHang.Columns)
-            {
-                dataTable.Columns.Add(column.HeaderText, column.ValueType);
-            }
-
-            foreach (DataGridViewRow row in dgvDSDonHang.Rows)
-            {
-                DataRow newRow = dataTable.NewRow();
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    newRow[cell.ColumnIndex] = cell.Value;
-                }
-                dataTable.Rows.Add(newRow);
-            }
-
             ReportDonHang reportDonHang = new ReportDonHang();
-            reportDonHang.SetDataSource(dataTable);
+            reportDonHang.SetDataSource(originalDataTable);
 
             formReport form = new formReport();
             form.crystalReportViewer1.ReportSource = reportDonHang;
